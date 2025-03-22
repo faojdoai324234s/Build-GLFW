@@ -21,11 +21,11 @@ jobs:
           mkdir upload
           mkdir upload\Debug
           mkdir upload\Release
-          cmake -B build
+          cmake -B build -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF
           cmake --build build --config Debug
           xcopy /y /v /s /e build upload\Debug
           rmdir /s /q build
-          cmake -B build
+          cmake -B build -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF
           cmake --build build --config Release
           xcopy /y /v /s /e build upload\Release
           
