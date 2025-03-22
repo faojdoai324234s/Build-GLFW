@@ -13,10 +13,16 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v4
-      - name: Build library
+      - name: Download source code
         shell: cmd
         run: |
           git clone https://github.com/glfw/glfw.git
+          cd glfw
+          git checkout 7b6aead9fb88b3623e3b3725ebb42670cbe4c579
+          
+      - name: Build library
+        shell: cmd
+        run: |
           xcopy /y /v /s /e glfw
           mkdir upload
           mkdir upload\Debug
