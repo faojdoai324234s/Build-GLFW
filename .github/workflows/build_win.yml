@@ -22,13 +22,11 @@ jobs:
           mkdir upload\Debug
           mkdir upload\Release
           cmake -B build
-          cmake --build build --config Debug -D BUILD_SHARED_LIBS=ON
-          cmake --install build
+          cmake --build build --config Debug
           xcopy /y /v /s /e build upload\Debug
           rmdir /s /q build
           cmake -B build
-          cmake --build build --config Release -D BUILD_SHARED_LIBS=ON
-          cmake --install build
+          cmake --build build --config Release
           xcopy /y /v /s /e build upload\Release
           
       - name: Upload artifact
