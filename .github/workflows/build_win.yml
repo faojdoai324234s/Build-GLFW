@@ -1,0 +1,37 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  Build-Win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build library
+        shell: cmd
+        run: |
+          git clone https://github.com/glfw/glfw.git
+          mkdir upload
+          mkdir upload\Debug
+          mkdir upload\Release
+          cmake -B build
+          cmake --build build --config Debug
+          xcopy /y /v /s /e build upload\Debug
+          rmdir /s /q build
+          cmake -B build
+          cmake --build build --config Release
+          xcopy /y /v /s /e build upload\Release
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-artifact
+          path: ${{github.workspace}}/upload
+          if-no-files-found: ignore
+          retention-days: 0
