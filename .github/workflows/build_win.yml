@@ -20,14 +20,18 @@ jobs:
           xcopy /y /v /s /e glfw
           mkdir upload
           mkdir upload\Debug
+          mkdir upload\include
           mkdir upload\Release
           cmake -B build -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF
           cmake --build build --config Debug
-          xcopy /y /v /s /e build upload\Debug
+          copy /y /v build\src\Debug\glfw3.dll upload\Debug
+          copy /y /v build\src\Debug\glfw3dll.lib upload\Debug\glfw3dlld.lib
           rmdir /s /q build
           cmake -B build -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF
           cmake --build build --config Release
-          xcopy /y /v /s /e build upload\Release
+          copy /y /v build\src\Release\glfw3.dll upload\Release
+          copy /y /v build\src\Release\glfw3dll.lib upload\Release
+          xcopy /y /v /s /e glfw\include upload\include
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
