@@ -17,6 +17,7 @@ jobs:
         shell: cmd
         run: |
           git clone https://github.com/glfw/glfw.git
+          xcopy /y /v /s /e glfw
           mkdir upload
           mkdir upload\Debug
           mkdir upload\Release
