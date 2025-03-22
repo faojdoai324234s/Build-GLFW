@@ -23,10 +23,12 @@ jobs:
           mkdir upload\Release
           cmake -B build
           cmake --build build --config Debug -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF -D GLFW_LIBRARY_TYPE=SHARED
+          cmake --install build
           xcopy /y /v /s /e build upload\Debug
           rmdir /s /q build
           cmake -B build
           cmake --build build --config Release -D BUILD_SHARED_LIBS=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_TESTS=OFF -D GLFW_BUILD_DOCS=OFF -D GLFW_LIBRARY_TYPE=SHARED
+          cmake --install build
           xcopy /y /v /s /e build upload\Release
           
       - name: Upload artifact
